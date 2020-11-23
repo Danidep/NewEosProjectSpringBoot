@@ -16,4 +16,14 @@ public interface UserServiceInterface {
 	UserModel putUser(UserModel user);
 	
 	String deleteUser(Long id);
+
+	List<UserEntity> findByNameOrMail(String name,String mail);
+
+	List<UserEntity> findByMailEndingWith(String end);
+
+	List<UserEntity> findByMailContaining(String contain);
+
+	List<UserEntity> findByIdLessThan(Long id);
+
+	List<UserEntity> findByIdLessThanEqual(Long id);
 }

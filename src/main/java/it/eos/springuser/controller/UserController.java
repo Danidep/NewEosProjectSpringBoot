@@ -36,7 +36,7 @@ public class UserController {
 	
 	@GetMapping("/user") 
 	public ResponseEntity<List<UserEntity>> getAllUser(){
-			return ResponseEntity.ok(repository.getAllUser());
+		return ResponseEntity.ok(repository.getAllUser());
 	}
 	
 	@DeleteMapping("/user/{id}")
@@ -47,6 +47,31 @@ public class UserController {
 	@PutMapping("/user")
 	public ResponseEntity<UserModel> putuser(@RequestBody UserModel user){
 			return ResponseEntity.ok(repository.putUser(user));
+	}
+
+	@GetMapping("/userFind/{name}/{mail}")
+	public ResponseEntity<List<UserEntity>> findByNameOrMail(@PathVariable("name") String name,@PathVariable("mail") String mail){
+		return ResponseEntity.ok(repository.findByNameOrMail(name,mail));
+	}
+
+	@GetMapping("/userEnding/{end}")
+	public ResponseEntity<List<UserEntity>> findByMailEndingWith(@PathVariable("end") String end){
+		return ResponseEntity.ok(repository.findByMailEndingWith(end));
+	}
+
+	@GetMapping("/userContain/{contain}")
+	public ResponseEntity<List<UserEntity>> findByMailContaining(@PathVariable("contain") String contain){
+		return ResponseEntity.ok(repository.findByMailContaining(contain));
+	}
+
+	@GetMapping("/userLess/{id}")
+	public ResponseEntity<List<UserEntity>> findByIdLessThan(@PathVariable("id") long id){
+		return ResponseEntity.ok(repository.findByIdLessThan(id));
+	}
+
+	@GetMapping("/userEqual/{id}")
+	public ResponseEntity<List<UserEntity>> findByIdLessThanEqual(@PathVariable("id") long id){
+		return ResponseEntity.ok(repository.findByIdLessThanEqual(id));
 	}
 }
 	

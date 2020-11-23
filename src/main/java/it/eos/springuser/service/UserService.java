@@ -69,4 +69,30 @@ public class UserService implements UserServiceInterface {
 			throw new ResourceNotFoundException("User not found");
 		}
 	}
+
+	@Override
+	public List<UserEntity> findByNameOrMail(String name, String mail) {
+		return this.userRepository.findByNameOrMail(name, mail);
+	}
+
+	@Override
+	public List<UserEntity> findByMailEndingWith(String end) {
+		return this.userRepository.findByMailEndingWith(end);
+	}
+
+	@Override
+	public List<UserEntity> findByMailContaining(String contain) {
+		return this.userRepository.findByMailContaining(contain);
+	}
+
+	@Override
+	public List<UserEntity> findByIdLessThan(Long id) {
+		return this.userRepository.findByIdLessThan(id);
+	}
+
+	@Override
+	public List<UserEntity> findByIdLessThanEqual(Long id) {
+		return this.userRepository.findByIdLessThanEqual(id);
+	}
+
 }
