@@ -1,6 +1,7 @@
 package it.eos.springuser;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.client.ExpectedCount;
 import org.junit.jupiter.api.Assertions;
 
@@ -9,6 +10,9 @@ import it.eos.springuser.model.UserModel;
 import it.eos.springuser.business.UserConverter;
 
 class EosProjectApplicationTests {
+
+	@Autowired
+	UserConverter userConverter;
 
 	@Test
 	void contextLoads() {
@@ -38,7 +42,7 @@ class EosProjectApplicationTests {
 		userEntity.setPassword("Password");
 		userEntity.setName("Name");
 
-		UserModel user = UserConverter.toModel(userEntity);
+		UserModel user = userConverter.toModel(userEntity);
 
 		Assertions.assertEquals(userEntity.getMail(), user.getMail());
 		Assertions.assertEquals(userEntity.getPassword(), user.getPassword());
@@ -54,7 +58,7 @@ class EosProjectApplicationTests {
 
 		String s1 = user.toString();
 		String s2 = s1.substring(s1.indexOf("{"));
-		String converted = UserConverter.toEntity(user).toString();
+		String converted = userConverter.toEntity(user).toString();
 		String converted2 = converted.substring(converted.indexOf("{"));
 
 		Assertions.assertEquals(s2, converted2);
@@ -67,8 +71,8 @@ class EosProjectApplicationTests {
 		user1.setPassword("Password");
 		user1.setName("Name");
 
-		UserEntity entity = UserConverter.toEntity(user1);
-		UserModel convertedFromEntity = UserConverter.toModel(entity);
+		UserEntity entity = userConverter.toEntity(user1);
+		UserModel convertedFromEntity = userConverter.toModel(entity);
 
 		Assertions.assertEquals(convertedFromEntity, user1);
 	}

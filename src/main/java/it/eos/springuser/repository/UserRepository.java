@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>{
     List<UserEntity> findByMailEndingWith(String end);
 
     @Query("FROM #{#entityName} WHERE mail like %?1%")
-    List<UserEntity> findByMailContaining(String end);
+    List<UserEntity> findByMailContaining(String contain);
 
     @Query("FROM #{#entityName} WHERE id < ?1")
     List<UserEntity> findByIdLessThan(Long id);

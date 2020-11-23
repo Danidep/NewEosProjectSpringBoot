@@ -19,11 +19,14 @@ public class UserService implements UserServiceInterface {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private UserConverter userConverter;
+
 	@Override
 	public UserModel save(UserModel user) {
-		UserEntity saveUser = UserConverter.toEntity(user);
+		UserEntity saveUser = userConverter.toEntity(user);
 		userRepository.save(saveUser);
-		return UserConverter.toModel(saveUser);
+		return userConverter.toModel(saveUser);
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class UserService implements UserServiceInterface {
 			putUser.setPassword(user.getPassword());
 			putUser.setName(user.getName());
 			userRepository.save(putUser);
-			return UserConverter.toModel(putUser);
+			return userConverter.toModel(putUser);
 		}else {
 			throw new ResourceNotFoundException("User not found");
 		}
@@ -64,7 +67,7 @@ public class UserService implements UserServiceInterface {
 		Optional<UserEntity> userDB = this.userRepository.findById(id);
 
 		if(userDB.isPresent()) {
-			return UserConverter.toModel(userDB.get());
+			return userConverter.toModel(userDB.get());
 		}else {
 			throw new ResourceNotFoundException("User not found");
 		}

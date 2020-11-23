@@ -69,4 +69,19 @@ public class AnimalService implements AnimalServiceInterface{
             throw new ResourceNotFoundException("Animal not found");
         }
     }
+
+    @Override
+    public List<AnimalEntity> findBySpeciesOrGenus(String species, String genus) {
+        return this.animalRepository.findBySpeciesOrGenus(species, genus);
+    }
+
+    @Override
+    public List<AnimalEntity> findByIdOrderBySpeciesDesc(long desc) {
+        return this.animalRepository.findByIdOrderBySpeciesDesc(desc);
+    }
+
+    @Override
+    public List<AnimalEntity> findByFamilyLike(String family) {
+        return this.animalRepository.findByFamilyLike(family);
+    }
 }

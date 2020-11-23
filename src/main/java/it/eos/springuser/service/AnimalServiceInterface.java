@@ -2,6 +2,7 @@ package it.eos.springuser.service;
 
 import it.eos.springuser.model.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
+import it.eos.springuser.model.UserEntity;
 
 import java.util.List;
 
@@ -17,4 +18,9 @@ public interface AnimalServiceInterface {
 
     String deleteAnimal(Long id);
 
+    List<AnimalEntity> findBySpeciesOrGenus(String species, String genus);
+
+    List<AnimalEntity> findByIdOrderBySpeciesDesc(long desc);
+
+    List<AnimalEntity> findByFamilyLike(String family);
 }

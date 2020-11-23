@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.eos.springuser.model.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
+import it.eos.springuser.model.UserEntity;
 import it.eos.springuser.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +47,20 @@ public class AnimalController {
     @PutMapping("/animal")
     public ResponseEntity<AnimalModel> putAnimal(@RequestBody AnimalModel animal){
         return ResponseEntity.ok(repository.putAnimal(animal));
+    }
+
+    @GetMapping("/animalFind/{species}/{genus}")
+    public ResponseEntity<List<AnimalEntity>> findBySpeciesOrGenus(@PathVariable("species") String species, @PathVariable("genus") String genus){
+        return ResponseEntity.ok(repository.findBySpeciesOrGenus(species,genus));
+    }
+
+    @GetMapping("/animalOrder/{desc}")
+    public ResponseEntity<List<AnimalEntity>> findByIdOrderBySpeciesDesc(@PathVariable("desc") long desc){
+        return ResponseEntity.ok(repository.findByIdOrderBySpeciesDesc(desc));
+    }
+
+    @GetMapping("/animalLike/{family}")
+    public ResponseEntity<List<AnimalEntity>> findByFamilyLike(@PathVariable("family") String family){
+        return ResponseEntity.ok(repository.findByFamilyLike(family));
     }
 }
