@@ -45,7 +45,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/user")
-	public ResponseEntity<UserModel> putuser(@RequestBody UserModel user){
+	public ResponseEntity<UserModel> putUser(@RequestBody UserModel user){
 			return ResponseEntity.ok(repository.putUser(user));
 	}
 

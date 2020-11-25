@@ -30,7 +30,7 @@ public class AnimalController {
     }
 
     @GetMapping("/animal/{id}")
-    public ResponseEntity<AnimalModel> getUserById(@PathVariable("id") long id){
+    public ResponseEntity<AnimalModel> getAnimalById(@PathVariable("id") long id){
         return ResponseEntity.ok(repository.getAnimalById(id));
     }
 
