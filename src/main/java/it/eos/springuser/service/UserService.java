@@ -12,7 +12,6 @@ import it.eos.springuser.model.UserEntity;
 import it.eos.springuser.model.UserModel;
 import it.eos.springuser.repository.UserRepository;
 
-
 @Service
 public class UserService implements UserServiceInterface {
 
