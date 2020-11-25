@@ -26,4 +26,8 @@ public interface UserServiceInterface {
 	List<UserEntity> findByIdLessThan(Long id);
 
 	List<UserEntity> findByIdLessThanEqual(Long id);
+
+	List<Long> findIdByMail(String contain);
+
+	List<Long> findIdByName(String name);
 }

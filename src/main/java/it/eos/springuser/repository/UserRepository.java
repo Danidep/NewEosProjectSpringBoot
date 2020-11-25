@@ -1,6 +1,5 @@
 package it.eos.springuser.repository;
 
-import it.eos.springuser.service.UserService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import it.eos.springuser.model.UserEntity;
@@ -10,10 +9,8 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long>{
 
-    @Query("FROM #{#entityName} WHERE name = ?1 or mail = ?2")
     List<UserEntity> findByNameOrMail(String name, String mail);
 
-    @Query("FROM #{#entityName} WHERE mail like %?1%")
     List<UserEntity> findByMailEndingWith(String end);
 
     @Query("FROM #{#entityName} WHERE mail like %?1%")
@@ -24,4 +21,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>{
 
     @Query("FROM #{#entityName} WHERE id <= ?1")
     List<UserEntity> findByIdLessThanEqual(Long id);
+
+    @Query(value = "SELECT id FROM USER WHERE mail like %?1%",nativeQuery = true)
+    List<Long> findIdByMail(String contain);
+
+    @Query(value = "SELECT id FROM USER WHERE name=?1",nativeQuery = true)
+    List<Long> findIdByName(String name);
 }

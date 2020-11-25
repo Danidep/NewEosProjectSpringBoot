@@ -73,6 +73,16 @@ public class UserController {
 	public ResponseEntity<List<UserEntity>> findByIdLessThanEqual(@PathVariable("id") long id){
 		return ResponseEntity.ok(repository.findByIdLessThanEqual(id));
 	}
+
+	@GetMapping("/findIdByMail/{contain}")
+	public ResponseEntity<List<Long>> findIdByMail(@PathVariable("contain") String contain){
+		return ResponseEntity.ok(repository.findIdByMail(contain));
+	}
+
+	@GetMapping("/findIdByName/{name}")
+	public ResponseEntity<List<Long>> findIdByName(@PathVariable("name") String name){
+		return ResponseEntity.ok(repository.findIdByName(name));
+	}
 }
 	
 

@@ -98,4 +98,14 @@ public class UserService implements UserServiceInterface {
 		return this.userRepository.findByIdLessThanEqual(id);
 	}
 
+	@Override
+	public List<Long> findIdByMail(String contain) {
+		return this.userRepository.findIdByMail(contain);
+	}
+
+	@Override
+	public List<Long> findIdByName(String name) {
+		return this.userRepository.findIdByName(name);
+	}
+
 }
