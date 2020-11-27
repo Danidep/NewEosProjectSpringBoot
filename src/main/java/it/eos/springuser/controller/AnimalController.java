@@ -4,7 +4,6 @@ import java.util.List;
 
 import it.eos.springuser.model.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
-import it.eos.springuser.model.UserEntity;
 import it.eos.springuser.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

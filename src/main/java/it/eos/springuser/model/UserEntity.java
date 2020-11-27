@@ -25,6 +25,9 @@ public class UserEntity {
 	@Column(name ="NAME")
 	private String name;
 
+	@Column(name ="ACTIVE")
+	private boolean active;
+
 	@Override
 	public String toString() {
 		return "UserEntity{" +
@@ -32,6 +35,7 @@ public class UserEntity {
 				", mail='" + mail + '\'' +
 				", password='" + password + '\'' +
 				", name='" + name + '\'' +
+				", active=" + active +
 				'}';
 	}
 
@@ -43,12 +47,13 @@ public class UserEntity {
 		return id == that.id &&
 				Objects.equals(mail, that.mail) &&
 				Objects.equals(password, that.password) &&
-				Objects.equals(name, that.name);
+				Objects.equals(name, that.name) &&
+				Objects.equals(active, that.active);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, mail, password, name);
+		return Objects.hash(id, mail, password, name, active);
 	}
 
 	public long getId() {
@@ -82,8 +87,13 @@ public class UserEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-		
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }
 

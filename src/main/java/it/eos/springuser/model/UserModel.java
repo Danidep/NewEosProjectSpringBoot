@@ -12,6 +12,8 @@ public class UserModel {
 
 	private String name;
 
+	private boolean active;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -20,7 +22,8 @@ public class UserModel {
 		return id == userModel.id &&
 				Objects.equals(mail, userModel.mail) &&
 				Objects.equals(password, userModel.password) &&
-				Objects.equals(name, userModel.name);
+				Objects.equals(name, userModel.name) &&
+				Objects.equals(active, userModel.active);
 	}
 
 	@Override
@@ -35,6 +38,7 @@ public class UserModel {
 				", mail='" + mail + '\'' +
 				", password='" + password + '\'' +
 				", name='" + name + '\'' +
+				", active=" + active +
 				'}';
 	}
 
@@ -68,5 +72,13 @@ public class UserModel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }

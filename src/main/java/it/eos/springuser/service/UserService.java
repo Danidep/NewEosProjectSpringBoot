@@ -42,6 +42,7 @@ public class UserService implements UserServiceInterface {
 			putUser.setMail(user.getMail());
 			putUser.setPassword(user.getPassword());
 			putUser.setName(user.getName());
+			putUser.setActive(user.isActive());
 			userRepository.save(putUser);
 			return userConverter.toModel(putUser);
 		}else {
