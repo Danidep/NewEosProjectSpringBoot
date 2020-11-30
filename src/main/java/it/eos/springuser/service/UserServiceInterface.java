@@ -2,8 +2,10 @@ package it.eos.springuser.service;
 
 import java.util.List;
 
+import it.eos.springuser.model.AnimalEntity;
 import it.eos.springuser.model.UserEntity;
 import it.eos.springuser.model.UserModel;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface UserServiceInterface {
 	
@@ -30,4 +32,10 @@ public interface UserServiceInterface {
 	List<Long> findIdByMail(String contain);
 
 	List<Long> findIdByName(String name);
+
+	UserModel changeActive(boolean active, long id);
+
+	UserModel changeName(String name, long id);
+
+	void deletedActiveFalse();
 }

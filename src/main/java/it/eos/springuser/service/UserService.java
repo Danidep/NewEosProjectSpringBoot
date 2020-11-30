@@ -12,6 +12,9 @@ import it.eos.springuser.model.UserEntity;
 import it.eos.springuser.model.UserModel;
 import it.eos.springuser.repository.UserRepository;
 
+import javax.transaction.Transactional;
+
+
 @Service
 public class UserService implements UserServiceInterface {
 
@@ -106,6 +109,36 @@ public class UserService implements UserServiceInterface {
 	@Override
 	public List<Long> findIdByName(String name) {
 		return this.userRepository.findIdByName(name);
+	}
+
+	@Override
+	@Transactional
+	public UserModel changeActive(boolean active, long id) {
+		this.userRepository.changeActive(active,id);
+		Optional<UserEntity> userDB = this.userRepository.findById(id);
+		if(userDB.isPresent()) {
+			return userConverter.toModel(userDB.get());
+		}else {
+			throw new ResourceNotFoundException("User not found");
+		}
+	}
+
+	@Override
+	@Transactional
+	public UserModel changeName(String name, long id) {
+		this.userRepository.changeName(name, id);
+		Optional<UserEntity> userDB = this.userRepository.findById(id);
+		if(userDB.isPresent()) {
+			return userConverter.toModel(userDB.get());
+		}else {
+			throw new ResourceNotFoundException("User not found");
+		}
+	}
+
+	@Override
+	@Transactional
+	public void deletedActiveFalse() {
+		this.userRepository.deletedActiveFalse();
 	}
 
 }

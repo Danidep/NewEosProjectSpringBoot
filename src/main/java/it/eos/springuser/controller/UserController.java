@@ -83,6 +83,22 @@ public class UserController {
 	public ResponseEntity<List<Long>> findIdByName(@PathVariable("name") String name){
 		return ResponseEntity.ok(repository.findIdByName(name));
 	}
+
+	@GetMapping("/changeActive/{active}/{id}")
+	public ResponseEntity<UserModel> changeActive(@PathVariable("active")boolean active,@PathVariable("id")long id){
+		return ResponseEntity.ok(repository.changeActive(active, id));
+	}
+
+	@GetMapping("/changeName/{name}/{id}")
+	public ResponseEntity<UserModel> changeName(@PathVariable("name")String name,@PathVariable("id")long id){
+		return ResponseEntity.ok(repository.changeName(name, id));
+	}
+
+	@GetMapping("/deletedActiveFalse")
+	public ResponseEntity<String> deletedActiveFalse(){
+		repository.deletedActiveFalse();
+		return ResponseEntity.ok("Delete");
+	}
 }
 	
 
