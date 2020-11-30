@@ -15,4 +15,12 @@ public interface AnimalRepository extends JpaRepository<AnimalEntity, Long> {
     List<AnimalEntity> findByIdOrderBySpeciesDesc(long desc);
 
     List<AnimalEntity> findByFamilyLike(String family);
+
+    @Modifying
+    @Query("UPDATE AnimalEntity SET species=?1 WHERE id=?2")
+    void changeSpecies(String species, long id);
+
+    @Modifying
+    @Query("DELETE FROM AnimalEntity WHERE species=?1")
+    void deletedSpecies(String species);
 }

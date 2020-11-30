@@ -23,4 +23,8 @@ public interface AnimalServiceInterface {
     List<AnimalEntity> findByIdOrderBySpeciesDesc(long desc);
 
     List<AnimalEntity> findByFamilyLike(String family);
+
+    AnimalModel changeSpecies(String species, long id);
+
+    void deletedSpecies(String species);
 }

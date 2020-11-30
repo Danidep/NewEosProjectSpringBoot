@@ -138,7 +138,10 @@ public class UserService implements UserServiceInterface {
 	@Override
 	@Transactional
 	public void deletedActiveFalse() {
-		this.userRepository.deletedActiveFalse();
+		try{
+			this.userRepository.deletedActiveFalse();
+		}catch (Exception e){
+			throw new ResourceNotFoundException("Error",e);
+		}
 	}
-
 }

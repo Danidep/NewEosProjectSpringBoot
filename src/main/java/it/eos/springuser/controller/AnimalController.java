@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
+
 @RestController
 @RequestMapping("/api")
 public class AnimalController {
@@ -61,5 +63,16 @@ public class AnimalController {
     @GetMapping("/animalLike/{family}")
     public ResponseEntity<List<AnimalEntity>> findByFamilyLike(@PathVariable("family") String family){
         return ResponseEntity.ok(repository.findByFamilyLike(family));
+    }
+
+    @GetMapping("/changeSpecies/{species}/{id}")
+    public ResponseEntity<AnimalModel> changeSpecies(@PathVariable("species")String species, @PathVariable("id")long id){
+        return ResponseEntity.ok(repository.changeSpecies(species, id));
+    }
+
+    @GetMapping("/deletedSpecies/{species}")
+    public ResponseEntity<String> deletedSpecies(@PathVariable("species")String species){
+        repository.deletedSpecies(species);
+        return ResponseEntity.ok("Delete species");
     }
 }

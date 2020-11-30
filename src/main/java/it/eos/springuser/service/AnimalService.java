@@ -5,10 +5,13 @@ import it.eos.springuser.business.AnimalConverter;
 import it.eos.springuser.exeption.ResourceNotFoundException;
 import it.eos.springuser.model.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
+import it.eos.springuser.model.UserEntity;
+import it.eos.springuser.model.UserModel;
 import it.eos.springuser.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,5 +86,27 @@ public class AnimalService implements AnimalServiceInterface{
     @Override
     public List<AnimalEntity> findByFamilyLike(String family) {
         return this.animalRepository.findByFamilyLike(family);
+    }
+
+    @Override
+    @Transactional
+    public AnimalModel changeSpecies(String species, long id) {
+        this.animalRepository.changeSpecies(species, id);
+        Optional<AnimalEntity> animalDB = this.animalRepository.findById(id);
+        if(animalDB.isPresent()) {
+            return AnimalConverter.toModel(animalDB.get());
+        }else {
+            throw new ResourceNotFoundException("Animal not found");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deletedSpecies(String species) {
+        try{
+            this.animalRepository.deletedSpecies(species);
+        }catch (Exception e){
+            throw new ResourceNotFoundException("Error",e);
+        }
     }
 }
