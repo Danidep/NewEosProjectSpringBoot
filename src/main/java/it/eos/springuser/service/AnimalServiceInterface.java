@@ -26,5 +26,9 @@ public interface AnimalServiceInterface {
 
     AnimalModel changeSpecies(String species, long id);
 
+    AnimalModel changeType(String type, long id);
+
     void deletedSpecies(String species);
+
+    void deletedType(String type);
 }

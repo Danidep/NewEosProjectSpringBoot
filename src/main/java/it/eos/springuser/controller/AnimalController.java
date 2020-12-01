@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
-
 @RestController
 @RequestMapping("/api")
 public class AnimalController {
@@ -70,9 +68,20 @@ public class AnimalController {
         return ResponseEntity.ok(repository.changeSpecies(species, id));
     }
 
+    @GetMapping("/changeType/{type}/{id}")
+    public ResponseEntity<AnimalModel> changeType(@PathVariable("type")String type, @PathVariable("id")long id){
+        return ResponseEntity.ok(repository.changeType(type, id));
+    }
+
     @GetMapping("/deletedSpecies/{species}")
     public ResponseEntity<String> deletedSpecies(@PathVariable("species")String species){
         repository.deletedSpecies(species);
         return ResponseEntity.ok("Delete species");
+    }
+
+    @GetMapping("/deletedType/{type}")
+    public ResponseEntity<String> deletedType(@PathVariable("type")String type){
+        repository.deletedType(type);
+        return ResponseEntity.ok("Delete type");
     }
 }

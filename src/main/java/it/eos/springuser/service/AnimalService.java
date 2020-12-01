@@ -102,9 +102,31 @@ public class AnimalService implements AnimalServiceInterface{
 
     @Override
     @Transactional
+    public AnimalModel changeType(String type, long id) {
+        this.animalRepository.changeType(type, id);
+        Optional<AnimalEntity> animalDB = this.animalRepository.findById(id);
+        if(animalDB.isPresent()) {
+            return AnimalConverter.toModel(animalDB.get());
+        }else {
+            throw new ResourceNotFoundException("Animal not found");
+        }
+    }
+
+    @Override
+    @Transactional
     public void deletedSpecies(String species) {
         try{
             this.animalRepository.deletedSpecies(species);
+        }catch (Exception e){
+            throw new ResourceNotFoundException("Error",e);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deletedType(String type) {
+        try{
+            this.animalRepository.deletedType(type);
         }catch (Exception e){
             throw new ResourceNotFoundException("Error",e);
         }

@@ -21,6 +21,14 @@ public interface AnimalRepository extends JpaRepository<AnimalEntity, Long> {
     void changeSpecies(String species, long id);
 
     @Modifying
+    @Query("UPDATE AnimalEntity SET type=?1 WHERE id=?2")
+    void changeType(String type, long id);
+
+    @Modifying
     @Query("DELETE FROM AnimalEntity WHERE species=?1")
     void deletedSpecies(String species);
+
+    @Modifying
+    @Query("DELETE FROM AnimalEntity WHERE type=?1")
+    void deletedType(String type);
 }
