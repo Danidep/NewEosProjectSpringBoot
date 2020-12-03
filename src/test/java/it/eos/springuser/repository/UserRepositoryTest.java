@@ -74,6 +74,5 @@ public class UserRepositoryTest {
         //then
         Assertions.assertNotNull(toFind);
         Assertions.assertEquals(state, toFind.isActive());
-
     }
 }
