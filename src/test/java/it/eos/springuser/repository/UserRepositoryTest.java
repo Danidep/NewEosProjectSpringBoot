@@ -35,7 +35,7 @@ public class UserRepositoryTest {
         }
 
     @Test
-    void when_find_user_by_name() {
+    void when_find_user_by_mail() {
         //given
         String mail ="andrea@mail.it";
 
@@ -74,5 +74,54 @@ public class UserRepositoryTest {
         //then
         Assertions.assertNotNull(toFind);
         Assertions.assertEquals(state, toFind.isActive());
+    }
+
+    @Test
+    void when_change_active() {
+        //given
+        long id = 1;
+        boolean active = true;
+
+        //when
+        userRepository.changeActive(active, id);
+        UserEntity toFind = userRepository.findById(id).orElse(null);
+
+        //then
+        Assertions.assertNotNull(toFind);
+        Assertions.assertEquals(active, toFind.isActive());
+    }
+
+    @Test
+    void when_mail_ending_with(){
+         String contain =".com";
+
+         List<UserEntity> list = userRepository.findByMailContaining(contain);
+
+         Assertions.assertNotNull(list);
+
+         UserEntity userEntity = list.get(0);
+         UserEntity toFind = userRepository.findById(userEntity.getId()).orElse(null);
+
+         Assertions.assertNotNull(toFind);
+         Assertions.assertEquals(userEntity, toFind);
+
+    }
+
+    @Test
+    void when_find_name_or_mail(){
+        String name = "andrea";
+
+        UserEntity toFindName = userRepository.findByNameOrMail(name,null).get(0);
+
+        Assertions.assertNotNull(toFindName);
+        Assertions.assertEquals(name, toFindName.getName());
+
+        String mail ="giulia@mail.com";
+
+        UserEntity toFindMail = userRepository.findByNameOrMail(null,mail).get(0);
+
+        Assertions.assertNotNull(toFindMail);
+        Assertions.assertEquals(mail, toFindMail.getMail());
+        
     }
 }
