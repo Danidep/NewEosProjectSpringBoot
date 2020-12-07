@@ -38,8 +38,14 @@ public class UserRepositoryTest {
     void when_find_user_by_mail() {
         //given
         String mail ="andrea@mail.it";
+        UserEntity userEntity = new UserEntity();
+        userEntity.setMail("andrea@mail.it");
+        userEntity.setName("test");
+        userEntity.setPassword("333");
+        userEntity.setActive(true);
 
         //when
+        UserEntity saved = userRepository.save(userEntity);
         List<Long> id = userRepository.findIdByMail(mail);
         UserEntity toFind = userRepository.findById(id.get(0)).orElse(null);
 
@@ -51,9 +57,15 @@ public class UserRepositoryTest {
     @Test
     void when_delete_user_by_id() {
         //given
+        UserEntity userEntity = new UserEntity();
+        userEntity.setMail("andrea@mail.it");
+        userEntity.setName("test");
+        userEntity.setPassword("333");
+        userEntity.setActive(true);
         long id = 1;
 
         //when
+        UserEntity saved = userRepository.save(userEntity);
         userRepository.deleteById(id);
         UserEntity toFind = userRepository.findById(id).orElse(null);
 
@@ -64,10 +76,16 @@ public class UserRepositoryTest {
     @Test
     void when_change_name() {
         //given
+        UserEntity userEntity = new UserEntity();
+        userEntity.setMail("andrea@mail.it");
+        userEntity.setName("test");
+        userEntity.setPassword("333");
+        userEntity.setActive(true);
         long id = 1;
         boolean state = true;
 
         //when
+        UserEntity saved = userRepository.save(userEntity);
         userRepository.changeActive(state, id);
         UserEntity toFind = userRepository.findById(id).orElse(null);
 
@@ -79,10 +97,16 @@ public class UserRepositoryTest {
     @Test
     void when_change_active() {
         //given
+        UserEntity userEntity = new UserEntity();
+        userEntity.setMail("andrea@mail.it");
+        userEntity.setName("test");
+        userEntity.setPassword("333");
+        userEntity.setActive(true);
         long id = 1;
         boolean active = true;
 
         //when
+        UserEntity saved = userRepository.save(userEntity);
         userRepository.changeActive(active, id);
         UserEntity toFind = userRepository.findById(id).orElse(null);
 
@@ -93,9 +117,18 @@ public class UserRepositoryTest {
 
     @Test
     void when_mail_ending_with(){
-         String contain =".com";
 
-         List<UserEntity> list = userRepository.findByMailContaining(contain);
+        UserEntity userEntitySave = new UserEntity();
+        userEntitySave.setMail("andrea@mail.com");
+        userEntitySave.setName("test");
+        userEntitySave.setPassword("333");
+        userEntitySave.setActive(true);
+
+
+        String contain =".com";
+
+        UserEntity saved = userRepository.save(userEntitySave);
+        List<UserEntity> list = userRepository.findByMailContaining(contain);
 
          Assertions.assertNotNull(list);
 
@@ -109,15 +142,24 @@ public class UserRepositoryTest {
 
     @Test
     void when_find_name_or_mail(){
-        String name = "andrea";
+        UserEntity userEntity = new UserEntity();
+        userEntity.setMail("prova@mail.com");
+        userEntity.setName("test");
+        userEntity.setPassword("333");
+        userEntity.setActive(true);
 
+        String name = "test";
+
+        UserEntity saved = userRepository.save(userEntity);
         UserEntity toFindName = userRepository.findByNameOrMail(name,null).get(0);
 
         Assertions.assertNotNull(toFindName);
         Assertions.assertEquals(name, toFindName.getName());
 
-        String mail ="giulia@mail.com";
+        UserEntity userMailEntity = new UserEntity();
+        String mail ="prova@mail.com";
 
+        UserEntity savedMail = userRepository.save(userEntity);
         UserEntity toFindMail = userRepository.findByNameOrMail(null,mail).get(0);
 
         Assertions.assertNotNull(toFindMail);
