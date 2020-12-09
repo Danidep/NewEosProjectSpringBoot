@@ -54,6 +54,8 @@ public class UserRepositoryTest {
         Assertions.assertEquals(mail, toFind.getMail());
     }
 
+
+
     @Test
     void when_delete_user_by_id() {
         //given
@@ -165,5 +167,43 @@ public class UserRepositoryTest {
         Assertions.assertNotNull(toFindMail);
         Assertions.assertEquals(mail, toFindMail.getMail());
         
+    }
+
+    @Test
+    void when_not_save_user_then_find_record() {
+        //given
+        UserEntity userEntity = new UserEntity();
+        userEntity.setMail("prova@mail.com");
+        userEntity.setName("test");
+        userEntity.setPassword("333");
+        userEntity.setActive(true);
+
+        //when
+        UserEntity saved = userRepository.save(userEntity);
+        UserEntity toFind = userRepository.findById(saved.getId()).orElse(null);
+
+        //then
+        Assertions.assertNull(toFind);
+    }
+
+    @Test
+    void when_not_change_active() {
+        //given
+        UserEntity userEntity = new UserEntity();
+        userEntity.setMail("andrea@mail.it");
+        userEntity.setName("test");
+        userEntity.setPassword("333");
+        userEntity.setActive(true);
+        long id = 1;
+        boolean active = false;
+
+        //when
+        UserEntity saved = userRepository.save(userEntity);
+        userRepository.changeActive(true, id);
+        UserEntity toFind = userRepository.findById(id).orElse(null);
+
+        //then
+        Assertions.assertNotNull(toFind);
+        Assertions.assertEquals(active, toFind.isActive());
     }
 }
