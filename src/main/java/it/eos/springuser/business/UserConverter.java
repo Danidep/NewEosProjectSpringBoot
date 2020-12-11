@@ -1,6 +1,6 @@
 package it.eos.springuser.business;
 
-import it.eos.springuser.model.UserEntity;
+import it.eos.springuser.repository.UserEntity;
 import it.eos.springuser.model.UserModel;
 import org.springframework.stereotype.Component;
 

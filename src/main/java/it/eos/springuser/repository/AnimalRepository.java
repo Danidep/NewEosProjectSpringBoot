@@ -1,7 +1,5 @@
 package it.eos.springuser.repository;
 
-import it.eos.springuser.model.AnimalEntity;
-import it.eos.springuser.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

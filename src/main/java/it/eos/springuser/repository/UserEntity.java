@@ -1,4 +1,4 @@
-package it.eos.springuser.model;
+package it.eos.springuser.repository;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

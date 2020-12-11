@@ -2,7 +2,7 @@ package it.eos.springuser.controller;
 
 import java.util.List;
 
-import it.eos.springuser.model.AnimalEntity;
+import it.eos.springuser.repository.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
 import it.eos.springuser.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;

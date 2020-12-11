@@ -2,7 +2,6 @@ package it.eos.springuser.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import it.eos.springuser.model.UserEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 

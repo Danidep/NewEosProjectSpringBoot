@@ -1,6 +1,6 @@
 package it.eos.springuser.business;
 
-import it.eos.springuser.model.AnimalEntity;
+import it.eos.springuser.repository.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
 
 public class AnimalConverter {

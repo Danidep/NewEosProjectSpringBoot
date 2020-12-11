@@ -1,6 +1,5 @@
 package it.eos.springuser.repository;
 
-import it.eos.springuser.model.UserEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

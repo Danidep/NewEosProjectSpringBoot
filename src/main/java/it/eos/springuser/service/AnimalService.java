@@ -3,10 +3,8 @@ package it.eos.springuser.service;
 
 import it.eos.springuser.business.AnimalConverter;
 import it.eos.springuser.exeption.ResourceNotFoundException;
-import it.eos.springuser.model.AnimalEntity;
+import it.eos.springuser.repository.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
-import it.eos.springuser.model.UserEntity;
-import it.eos.springuser.model.UserModel;
 import it.eos.springuser.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

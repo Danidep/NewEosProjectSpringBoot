@@ -1,7 +1,7 @@
 package it.eos.springuser;
 
 import it.eos.springuser.business.UserConverter;
-import it.eos.springuser.model.UserEntity;
+import it.eos.springuser.repository.UserEntity;
 import it.eos.springuser.model.UserModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

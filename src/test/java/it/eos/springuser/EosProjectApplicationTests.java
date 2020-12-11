@@ -2,10 +2,9 @@ package it.eos.springuser;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.client.ExpectedCount;
 import org.junit.jupiter.api.Assertions;
 
-import it.eos.springuser.model.UserEntity;
+import it.eos.springuser.repository.UserEntity;
 import it.eos.springuser.model.UserModel;
 import it.eos.springuser.business.UserConverter;
 

@@ -1,8 +1,7 @@
 package it.eos.springuser.service;
 
-import it.eos.springuser.model.AnimalEntity;
+import it.eos.springuser.repository.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
-import it.eos.springuser.model.UserEntity;
 
 import java.util.List;
 

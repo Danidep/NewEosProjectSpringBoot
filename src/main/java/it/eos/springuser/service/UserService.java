@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import it.eos.springuser.business.UserConverter;
 import it.eos.springuser.exeption.ResourceNotFoundException;
-import it.eos.springuser.model.UserEntity;
+import it.eos.springuser.repository.UserEntity;
 import it.eos.springuser.model.UserModel;
 import it.eos.springuser.repository.UserRepository;
 

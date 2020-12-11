@@ -1,7 +1,7 @@
 package it.eos.springuser;
 
 import it.eos.springuser.business.AnimalConverter;
-import it.eos.springuser.model.AnimalEntity;
+import it.eos.springuser.repository.AnimalEntity;
 import it.eos.springuser.model.AnimalModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
