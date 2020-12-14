@@ -13,6 +13,7 @@ public class UserConverter {
 		userModel.setMail(user.getMail());
 		userModel.setPassword(user.getPassword());
 		userModel.setName(user.getName());
+		userModel.setActive(user.isActive());
 		return userModel;
 	}
 	
@@ -22,6 +23,7 @@ public class UserConverter {
 		userEntity.setMail(user.getMail());
 		userEntity.setPassword(user.getPassword());
 		userEntity.setName(user.getName());
+		userEntity.setActive(userEntity.isActive());
 		return userEntity;
 	}
 }
