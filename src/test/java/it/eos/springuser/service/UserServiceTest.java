@@ -60,7 +60,7 @@ public class UserServiceTest {
         userModel.setName("test");
         userModel.setPassword("333");
         userModel.setActive(false);
-        boolean active = false;
+        boolean active = true;
 
         //when
         UserModel saved = userService.save(userModel);

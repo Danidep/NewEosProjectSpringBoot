@@ -56,9 +56,10 @@ import java.util.List;
 
         @Test
         void when_find_user_by_mail() {
+
             //given
             UserModel userModel = new UserModel();
-            userModel.setMail("prova@mail.it");
+            userModel.setMail("prova@mail.com");
             userModel.setName("test");
             userModel.setPassword("333");
             userModel.setActive(false);
@@ -77,15 +78,43 @@ import java.util.List;
                 toFind = userModel;
             }
 
-
-
-
             //then
             Assertions.assertNotNull(toFind);
             Assertions.assertEquals(saved.getMail(), toFind.getMail());
             Mockito.verify(userRepository, Mockito.times(1)).save(toSave);
             Mockito.verify(userConverter, Mockito.times(1)).toModel(toSave);
+        }
 
+        @Test
+        void when_change_active() {
+
+            //given
+            UserModel userModel = new UserModel();
+            userModel.setMail("test@mail.it");
+            userModel.setName("test");
+            userModel.setPassword("333");
+            userModel.setActive(false);
+            boolean active = false;
+
+            UserEntity userEntity = new UserEntity();
+            userEntity.setMail("prova@mail.com");
+            userEntity.setName("test");
+            userEntity.setPassword("333");
+            userEntity.setActive(false);
+
+            //when
+            Mockito.when(userRepository.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
+            UserEntity saved = userRepository.save(userEntity);
+            try{
+                userService.changeActive(active, saved.getId());
+            }catch(Exception e){
+
+            }
+
+            //then
+            Assertions.assertNotNull(saved);
+            Assertions.assertEquals(active, saved.isActive());
+            Mockito.verify(userRepository, Mockito.times(1)).save(userEntity);
         }
     }
 
