@@ -13,7 +13,12 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
 import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.same;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
     public class UserServiceMockTest {
@@ -44,46 +49,42 @@ import java.util.List;
             toSave.setActive(false);
 
             //when
-            Mockito.when(userRepository.save(Mockito.any(UserEntity.class))).thenReturn(toSave);
+            when(userRepository.save(any(UserEntity.class))).thenReturn(toSave);
             UserModel saved = userService.save(userModel);
 
             //then
             Assertions.assertEquals(userModel, saved);
-            Mockito.verify(userRepository, Mockito.times(1)).save(toSave);
-            Mockito.verify(userConverter, Mockito.times(1)).toEntity(userModel);
-            Mockito.verify(userConverter, Mockito.times(1)).toModel(toSave);
+            verify(userRepository, times(1)).save(toSave);
+            verify(userConverter, times(1)).toEntity(userModel);
+            verify(userConverter, times(1)).toModel(toSave);
         }
 
-        @Test
-        void when_find_user_by_mail() {
+    @Test
+    void when_find_id_by_mail_then_check_correct_id() {
 
-            //given
-            UserModel userModel = new UserModel();
-            userModel.setMail("prova@mail.com");
-            userModel.setName("test");
-            userModel.setPassword("333");
-            userModel.setActive(false);
+        //given
+        UserModel userModel = new UserModel();
+        userModel.setMail("prova@mail.com");
 
+        UserEntity toSave = new UserEntity();
+        toSave.setMail("prova@mail.com");
 
-            //when
-            UserEntity toSave = userConverter.toEntity(userModel);
-            Mockito.when(userRepository.save(Mockito.any(UserEntity.class))).thenReturn(toSave);
-            UserModel saved = userService.save(userModel);
-            List<Long> id = userService.findIdByMail(userModel.getMail());
-            UserModel toFind = null;
-            if(!id.isEmpty()){
-                toFind = userService.getUserById(id.get(0));
-            }else
-            {
-                toFind = userModel;
-            }
+        List<Long> idListMockingOutput = Collections.singletonList(1L);
 
-            //then
-            Assertions.assertNotNull(toFind);
-            Assertions.assertEquals(saved.getMail(), toFind.getMail());
-            Mockito.verify(userRepository, Mockito.times(1)).save(toSave);
-            Mockito.verify(userConverter, Mockito.times(1)).toModel(toSave);
-        }
+        //when
+        when(userRepository.save(any(UserEntity.class))).thenReturn(toSave);
+        when(userRepository.findIdByMail(same(userModel.getMail()))).thenReturn(idListMockingOutput);
+        userService.save(userModel);
+        List<Long> idListOutputService = userService.findIdByMail(userModel.getMail());
+
+        //then
+        Assertions.assertNotNull(idListOutputService);
+        Assertions.assertEquals(idListMockingOutput, idListOutputService);
+        verify(userRepository, times(1)).findIdByMail(userModel.getMail());
+        verify(userRepository, times(1)).save(any(UserEntity.class));
+        verify(userConverter, times(1)).toEntity(userModel);
+        verify(userConverter, times(1)).toModel(toSave);
+    }
 
         @Test
         void when_change_active() {
@@ -102,19 +103,23 @@ import java.util.List;
             userEntity.setPassword("333");
             userEntity.setActive(false);
 
-            //when
-            Mockito.when(userRepository.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
-            UserEntity saved = userRepository.save(userEntity);
-            try{
-                userService.changeActive(active, saved.getId());
-            }catch(Exception e){
+            UserEntity userModelMock = new UserEntity();
 
-            }
+            UserEntity userEntityActive = new UserEntity();
+
+            //when
+            when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
+            when(userRepository.findById(Mockito.anyLong())).thenReturn(java.util.Optional.of(userModelMock));
+            Mockito.doAnswer(RETURNS_MOCKS).when(userRepository).changeActive(eq(active),Mockito.anyLong());
+            userService.save(userModel);
+            userModel = userService.changeActive(active,0);
 
             //then
-            Assertions.assertNotNull(saved);
-            Assertions.assertEquals(active, saved.isActive());
-            Mockito.verify(userRepository, Mockito.times(1)).save(userEntity);
+            Assertions.assertNotNull(userModel);
+            Assertions.assertEquals(active, userModel.isActive());
+            verify(userRepository, times(1)).save(any(UserEntity.class));
+            verify(userRepository, times(1)).changeActive(active,0);
+            verify(userRepository, times(1)).findById(0L);
         }
     }
 
